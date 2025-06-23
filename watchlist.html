@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
@@ -11,5 +14,35 @@
          <p>Baby I am tired</p>
          <img src="">
     </div>
+    <script>
+        //Retrieving the data 
+        const movie = JSON.parse(localStorage.getItem("selectedMovie"))
+        console.log(movie)
+        if(movie){
+            const container = document.createElement("div")
+            container.classList.add("movie-content")
+            console.log(container)
+            container.innerHTML= 
+            `
+                <img src=${movie.poster} class="movie-img">
+                <div class="movie-info">
+                    <div class="movie-des">
+                      <h3 class="movie-title">${movie.title}</h3>
+                      <p class="movie-rating"><i class="fa-solid fa-star"></i>${movie.rating}</p>
+                    </div>
+                    <div class="movie-des">
+                      <p class="movie-duration">${movie.runtime}</p>
+                      <p class="movie-genre">${movie.genre}</p>
+                      <p class=movie-watch"><i class="fa-solid fa-circle-plus"></i>Watchlist</p>
+                    </div>             
+                    <p class="movie-plot">${movie.plot}</p>
+                </div>
+              
+             
+            `
+            document.body.appendChild(container)
+        }
+    </script>
 </body>
+
 </html>
