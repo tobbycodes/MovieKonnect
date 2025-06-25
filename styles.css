@@ -120,8 +120,9 @@ main{
 }
 
 .dark-mode{
-    background-color: black;
+    /* background-color: black; */
     /* background:#3A3A3A; */
+    background-color: #393939;
 }
 
 
