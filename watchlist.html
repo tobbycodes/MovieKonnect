@@ -9,15 +9,28 @@
     <title>Document</title>
 </head>
 <body>
+     <header>
+            <svg xmlns="http://www.w3.org/2000/svg" class="theme" onclick="toggleTheme()" viewBox="0 0 576 512"><path d="M384 128c70.7 0 128 57.3 128 128s-57.3 128-128 128l-192 0c-70.7 0-128-57.3-128-128s57.3-128 128-128l192 0zM576 256c0-106-86-192-192-192L192 64C86 64 0 150 0 256S86 448 192 448l192 0c106 0 192-86 192-192zM192 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="theme hide-btn" hide-btn" onclick="toggleTheme()" viewBox="0 0 576 512"><path d="M192 64C86 64 0 150 0 256S86 448 192 448l192 0c106 0 192-86 192-192s-86-192-192-192L192 64zm192 96a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>
+            <div class="hero-text">
+                <h1 class="hero-text">Find your film</h1>
+                <p id="watchlist-page"><a class="" href="watchlist.html">My Watchlist</a></p>
+            </div>
+            
+         
+     </header>
     <script>
         //Retrieving the data 
         const movie = JSON.parse(localStorage.getItem("selectedMovie"))
         console.log(movie)
+        //Check the movie object -> movie string is true then display it on the screen
         if(movie){
+            //Create a div element for storing the movie string content e.g movie-poster, movie-image
             const container = document.createElement("div")
+            //Adding a class for the html content 
             container.classList.add("movie-content")
             console.log(container)
-            container.innerHTML= 
+            container.innerHTML += 
             `
                 <img src=${movie.poster} class="movie-img">
                 <div class="movie-info">
@@ -28,7 +41,7 @@
                     <div class="movie-des">
                       <p class="movie-duration">${movie.runtime}</p>
                       <p class="movie-genre">${movie.genre}</p>
-                      <p class=movie-watch"><i class="fa-solid fa-circle-plus"></i>Watchlist</p>
+                      <p class=movie-watch id="remove-btn"><i class="fa-solid fa-circle-minus"></i>Remove</p>
                     </div>             
                     <p class="movie-plot">${movie.plot}</p>
                 </div>
@@ -36,7 +49,69 @@
              
             `
             document.body.appendChild(container)
+
+            removeBtn = document.querySelector("#remove-btn")
+            console.log(removeBtn)
+            removeBtn.addEventListener("click",function(){
+            
+               container.innerHTML = `
+               <div class="remove-text">
+                <h3 class="movie-title">Your Watchlist is looking a little empty...</h3>
+                 <p class="movie-add"><i class="fa-solid fa-circle-plus"></i>Let's add some Movie!</p>
+               </div>
+               `
+            })
         }
+
+        
+function toggleTheme(){
+   const svgs = document.querySelectorAll("svg")
+
+   svgs.forEach(theme =>{
+    theme.classList.toggle("hide-btn")
+    
+   })
+  if(document.body.classList.toggle("dark-mode")){
+    const movieContainer = document.querySelectorAll(".movie-content")
+    movieContainer.forEach(movie =>{
+    console.log(movie)
+    movie.style.color = "white"
+  
+    const moviePlots = document.querySelectorAll(".movie-plot")
+    for(let moviePlot of moviePlots){
+      
+        moviePlot.style.color="white"
+        console.log(moviePlots)
+      
+    }
+
+    
+    
+    })
+  }
+
+  else{
+    const movieContainer = document.querySelectorAll(".movie-content")
+    movieContainer.forEach(movie =>{
+    console.log(movie)
+    movie.style.color = "black"
+   
+
+    const moviePlots = document.querySelectorAll(".movie-plot")
+    for(let moviePlot of moviePlots){
+      
+        moviePlot.style.color="black"
+        console.log(moviePlots)
+      
+    }
+
+    
+    
+    })
+  }
+  
+ 
+}
     </script>
 </body>
 

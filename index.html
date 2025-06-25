@@ -10,12 +10,16 @@
     </head>
     <body>
         <header>
+
+            
+            <svg xmlns="http://www.w3.org/2000/svg" class="theme" onclick="toggleTheme()" viewBox="0 0 576 512"><path d="M384 128c70.7 0 128 57.3 128 128s-57.3 128-128 128l-192 0c-70.7 0-128-57.3-128-128s57.3-128 128-128l192 0zM576 256c0-106-86-192-192-192L192 64C86 64 0 150 0 256S86 448 192 448l192 0c106 0 192-86 192-192zM192 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="theme hide-btn" hide-btn" onclick="toggleTheme()" viewBox="0 0 576 512"><path d="M192 64C86 64 0 150 0 256S86 448 192 448l192 0c106 0 192-86 192-192s-86-192-192-192L192 64zm192 96a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>
             <div class="hero-text">
                 <h1 class="hero-text">Find your film</h1>
                 <p id="watchlist-page"><a class="" href="watchlist.html">My Watchlist</a></p>
             </div>
             
-            <form>
+            <form id="form">
                 <div class="input-container">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" id="movie-input" class="movie-text" placeholder="Search for a value" value="">
@@ -44,6 +48,8 @@
                         </div>
                     </div>
             </div> -->
+            <div class="error-text"></div>
+            
             </div>
         
         </main>

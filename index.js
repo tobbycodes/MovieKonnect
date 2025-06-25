@@ -1,12 +1,60 @@
-document.getElementById("search-btn").addEventListener("click",generateMovie)
 const movieContainer = document.querySelector("main")
 // console.log(movieContainer)
 const api_key= "716d62f1"
 const movieInput = document.getElementById("movie-input")
 
+//Function for changing from light mode to anothr mode
+function toggleTheme(){
+   const svgs = document.querySelectorAll("svg")
+
+   svgs.forEach(theme =>{
+    theme.classList.toggle("hide-btn")
+    
+   })
+  if(document.body.classList.toggle("dark-mode")){
+    const movieContainer = document.querySelectorAll(".movie-content")
+    movieContainer.forEach(movie =>{
+    console.log(movie)
+    movie.style.color = "white"
+  
+    const moviePlots = document.querySelectorAll(".movie-plot")
+    for(let moviePlot of moviePlots){
+      
+        moviePlot.style.color="white"
+        console.log(moviePlots)
+      
+    }
+
+    
+    
+    })
+  }
+
+  else{
+    const movieContainer = document.querySelectorAll(".movie-content")
+    movieContainer.forEach(movie =>{
+    console.log(movie)
+    movie.style.color = "black"
+   
+
+    const moviePlots = document.querySelectorAll(".movie-plot")
+    for(let moviePlot of moviePlots){
+      
+        moviePlot.style.color="black"
+        console.log(moviePlots)
+      
+    }
+
+    
+    
+    })
+  }
+  
+ 
+}
 
 function generateMovie(event){
-        event.preventDefault()
+
         fetch(`https://www.omdbapi.com/?apiKey=${api_key}&s=${movieInput.value}`)
         .then(res => res.json())
         .then(data => {
@@ -58,8 +106,9 @@ function generateMovie(event){
 
                 //Storing data and converting the object into a string
                 localStorage.setItem("selectedMovie",JSON.stringify(movie))
+                //the location of the local Storage is "watchlist.html"
                 window.location.href="watchlist.html"
-                console.log(movie.poster)
+                
 
                 
               })
@@ -82,9 +131,27 @@ function generateMovie(event){
           })
           }
         
-
+         
         })
+        .catch(error => {
           
+          if(error= true){
+              const errorText = document.querySelector(".error-text")
+         
+              errorText.textContent= "Unable to find what you are looking for.Please try another search"
+              
+          }
+
+          else if(error.message.includes('data.search is undefined')){
+            errorText.style.visibility = "hidden"
+            errorText.style.color = "orange"
+            console.log("You are right,I am going")
+          }
+          
+          
+       
+        //  console.error("Unable to find what you are looking for.Please try another search",error)
+         })
 
   const container = document.querySelector(".container")
   container.style.visibility = "hidden"
@@ -92,6 +159,8 @@ function generateMovie(event){
   main.style.margin = "0"
    
 }
+
+document.getElementById("search-btn").addEventListener("click",generateMovie)
 
 
 
