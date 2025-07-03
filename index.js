@@ -53,14 +53,15 @@ function toggleTheme(){
  
 }
 
-function generateMovie(event){
-
-        fetch(`https://www.omdbapi.com/?apiKey=${api_key}&s=${movieInput.value}`)
-        .then(res => res.json())
-        .then(data => {
+async function generateMovie(event){
+      event.preventDefault()
+       const response = await fetch(`https://www.omdbapi.com/?apiKey=${api_key}&s=${movieInput.value}`)
+        const data = await response.json()
+        console
+        
         
           for(let movieList of data.Search){
-
+          
 
           fetch(`https://www.omdbapi.com/?apiKey=${api_key}&i=${movieList.imdbID}`)
           .then(res=> res.json())
@@ -86,33 +87,32 @@ function generateMovie(event){
               
               </div>
           `
-          
+          movieContainer.style.margin="0px"
+          const addMovie = document.querySelectorAll(".fa-circle-plus")
+        
+      
+          for(let movie of addMovie){
+        
+            movie.addEventListener("click",function(){
+              const movieWatchlist = {
+              poster: document.querySelector(".movie-img").src,
+              title: document.querySelector(".movie-title").textContent,
+              rating: document.querySelector(".movie-rating").textContent,
+              runtime: document.querySelector(".movie-duration").textContent,
+              genre: document.querySelector(".movie-genre").textContent,
+              plot: document.querySelector(".movie-plot").textContent
+
+            }
+      
+           
+            localStorage.setItem('movie',JSON.stringify(movieWatchlist))
+             window.location.href="watchlist.html"
+            })
+           
+          }
         
          
-            const movieAdd = document.querySelectorAll(".fa-circle-plus")
-            
-            movieAdd.forEach((baby)=> {
-              baby.addEventListener('click',(event)=>{
-                const connect =baby.closest('.movie-content')
-                console
-                const movie = {
-                  poster: connect.querySelector(".movie-img").src,
-                  title: connect.querySelector(".movie-title").textContent,
-                  rating: connect.querySelector(".movie-rating").textContent,
-                  runtime: connect.querySelector(".movie-duration").textContent,
-                  genre: connect.querySelector(".movie-genre").textContent,
-                  plot: connect.querySelector(".movie-plot").textContent
-                }
-
-                //Storing data and converting the object into a string
-                localStorage.setItem("selectedMovie",JSON.stringify(movie))
-                //the location of the local Storage is "watchlist.html"
-                window.location.href="watchlist.html"
-                
-
-                
-              })
-            })
+          
             
              
 
@@ -132,26 +132,26 @@ function generateMovie(event){
           }
         
          
-        })
-        .catch(error => {
+      
+        // .catch(error => {
           
-          if(error= true){
-              const errorText = document.querySelector(".error-text")
+        //   if(error= true){
+        //       const errorText = document.querySelector(".error-text")
          
-              errorText.textContent= "Unable to find what you are looking for.Please try another search"
+        //       errorText.textContent= "Unable to find what you are looking for.Please try another search"
               
-          }
+        //   }
 
-          else if(error.message.includes('data.search is undefined')){
-            errorText.style.visibility = "hidden"
-            errorText.style.color = "orange"
-            console.log("You are right,I am going")
-          }
+        //   else if(error.message.includes('data.search is undefined')){
+        //     errorText.style.visibility = "hidden"
+        //     errorText.style.color = "orange"
+        //     console.log("You are right,I am going")
+        //   }
           
           
        
-        //  console.error("Unable to find what you are looking for.Please try another search",error)
-         })
+        // //  console.error("Unable to find what you are looking for.Please try another search",error)
+        //  })
 
   const container = document.querySelector(".container")
   container.style.visibility = "hidden"

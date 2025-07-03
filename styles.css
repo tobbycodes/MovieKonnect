@@ -5,13 +5,16 @@
     box-sizing: border-box;
 }
 
+:root{
+    --primary-color:#A97454;
+}
 body{
     display:flex;
     flex-direction: column;
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-weight:400;
     height:100vh;
-    color:#A97454;
+    color:var(--primary-color);
    
 }
 
@@ -121,8 +124,9 @@ main{
 
 .dark-mode{
     /* background-color: black; */
-    /* background:#3A3A3A; */
     background-color: #393939;
+    /* background:#3A3A3A; */
+    /* background-color: #393939; */
 }
 
 
@@ -153,6 +157,7 @@ main{
     height:400px;
     object-fit:700px;
     border-radius:3px;
+    border:3px solid black;
     aspect-ratio: 16/9;
     image-rendering: smooth;
 }

@@ -20,48 +20,59 @@
          
      </header>
     <script>
-        //Retrieving the data 
-        const movie = JSON.parse(localStorage.getItem("selectedMovie"))
-        console.log(movie)
-        //Check the movie object -> movie string is true then display it on the screen
-        if(movie){
-            //Create a div element for storing the movie string content e.g movie-poster, movie-image
-            const container = document.createElement("div")
-            //Adding a class for the html content 
-            container.classList.add("movie-content")
-            console.log(container)
-            container.innerHTML += 
-            `
-                <img src=${movie.poster} class="movie-img">
-                <div class="movie-info">
-                    <div class="movie-des">
-                      <h3 class="movie-title">${movie.title}</h3>
-                      <p class="movie-rating"><i class="fa-solid fa-star"></i>${movie.rating}</p>
-                    </div>
-                    <div class="movie-des">
-                      <p class="movie-duration">${movie.runtime}</p>
-                      <p class="movie-genre">${movie.genre}</p>
-                      <p class=movie-watch id="remove-btn"><i class="fa-solid fa-circle-minus"></i>Remove</p>
-                    </div>             
-                    <p class="movie-plot">${movie.plot}</p>
-                </div>
-              
-             
-            `
-            document.body.appendChild(container)
+      const movieWatchlist = JSON.parse(localStorage.getItem('movie'))
+      console.log(movieWatchlist)
 
-            removeBtn = document.querySelector("#remove-btn")
+      if(movieWatchlist){
+         const container = document.createElement("div")
+          container.classList.add("movieContent")
+          console.log(container)
+        
+          container.innerHTML +=   `
+            <div class="movie-content">
+              
+                    <img src=${movieWatchlist.poster} class="movie-img">
+                    <div class="movie-info">
+                        <div class="movie-des">
+                          <h3 class="movie-title">${movieWatchlist.title}</h3>
+                          <p class="movie-rating"><i class="fa-solid fa-star"></i>${movieWatchlist.rating}</p>
+                        </div>
+                        <div class="movie-des">
+                          <p class="movie-duration">${movieWatchlist.runtime}</p>
+                          <p class="movie-genre">${movieWatchlist.genre}</p>
+                          <p class=movie-watch"><i class="fa-solid fa-circle-minus" id="remove-btn"></i>Remove</p>
+                        </div>             
+                        <p class="movie-plot">${movieWatchlist.plot}</p>
+                  
+                  </div>
+          `
+
+           document.body.appendChild(container)
+            
+           container.style.margin = "50px"
+
+            const removeBtn = document.querySelector("#remove-btn")
             console.log(removeBtn)
             removeBtn.addEventListener("click",function(){
             
                container.innerHTML = `
                <div class="remove-text">
                 <h3 class="movie-title">Your Watchlist is looking a little empty...</h3>
-                 <p class="movie-add"><i class="fa-solid fa-circle-plus"></i>Let's add some Movie!</p>
+                 <p class="movie-add"  id="add-movie"><i class="fa-solid fa-circle-plus"></i>Let's add some Movie!</p>
                </div>
                `
+               
+               function getMoreMovies(){
+                window.location.href="index.html"
+               }
+               document.getElementById("add-movie").addEventListener("click",getMoreMovies)
             })
-        }
+      }
+      
+
+     
+          
+        
 
         
 function toggleTheme(){
